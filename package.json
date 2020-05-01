@@ -1,0 +1,23 @@
+{
+  "name": "loop",
+  "version": "0.1.0",
+  "description": "Simple game loop",
+  "main": "Loop.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rocket-boots/Loop.git"
+  },
+  "keywords": [
+    "gamedev",
+    "loop"
+  ],
+  "author": "Luke Nickerson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rocket-boots/Loop/issues"
+  },
+  "homepage": "https://github.com/rocket-boots/Loop#readme"
+}
