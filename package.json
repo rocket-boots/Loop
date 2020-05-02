@@ -1,5 +1,5 @@
 {
-  "name": "loop",
+  "name": "rocket-boots-loop",
   "version": "0.2.0",
   "description": "Simple game loop",
   "main": "index.mjs",
