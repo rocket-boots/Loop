@@ -12,10 +12,10 @@ class IntervalLoop extends Loop {
 	}
 	// Override start and stop
 	start() {
-		this.lastLoopTime = performance.now();
+		this.lastLoopTime = this.now();
 		this.continueLoop = true;
 		this.intervalTimer = setInterval(() => {
-			this.loop(performance.now());
+			this.loop(this.now());
 		}, this.intervalTime);
 	}
 	stop() {

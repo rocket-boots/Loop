@@ -6,6 +6,7 @@ class Loop {
 		this.next = this.loopOnNextFrame;
 		this.timeScale = (typeof options.timeScale === 'number') ? options.timeScale : 1;
 		this.tick = 0;
+		this.now = (performance) ? () => performance.now() : () => Date.now();
 	}
 	loopOnNextFrame() {
 		if (!this.continueLoop) { return; }
@@ -28,7 +29,7 @@ class Loop {
 		this.next();
 	}
 	start() {
-		this.lastLoopTime = performance.now();
+		this.lastLoopTime = this.now();
 		this.continueLoop = true;
 		this.next();
 	}
