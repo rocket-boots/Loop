@@ -1,19 +1,11 @@
 class Loop {
-	constructor(fn) {
+	constructor(fn, options = {}) {
 		this.lastLoopTime = 0;
 		this.continueLoop = true;
 		this.looper = (typeof fn === 'function') ? fn : () => {};
-		this.timeScale = 1;
+		this.next = this.loopOnNextFrame;
+		this.timeScale = (typeof options.timeScale === 'number') ? options.timeScale : 1;
 		this.tick = 0;
-	}
-	start() {
-		this.lastLoopTime = performance.now();
-		this.continueLoop = true;
-		this.loopOnNextFrame();
-	}
-	setup(fn) {
-		this.looper = fn;
-		return this;
 	}
 	loopOnNextFrame() {
 		if (!this.continueLoop) { return; }
@@ -21,7 +13,7 @@ class Loop {
 	}
 	loop(now) {
 		if (!this.continueLoop) { return; }
-		const deltaT = ((now - this.lastLoopTime) / 1000) * this.timeScale;
+		const deltaT = (now - this.lastLoopTime) * this.timeScale;
 		if (this.tick >= Number.MAX_SAFE_INTEGER) {
 			this.tick = 0;
 		} else {
@@ -29,10 +21,18 @@ class Loop {
 		}
 		const returnStop = this.looper(deltaT, this.tick, now);
 		this.lastLoopTime = now;
-		this.continueLoop = (returnStop) ? false : true;
-		this.loopOnNextFrame();
+		if (returnStop) {
+			this.stop();
+			return;
+		}
+		this.next();
 	}
-	contiue() {
+	start() {
+		this.lastLoopTime = performance.now();
+		this.continueLoop = true;
+		this.next();
+	}
+	continue() {
 		this.continueLoop = true;
 	}
 	stop() {
@@ -45,9 +45,6 @@ class Loop {
 	isLooping() {
 		return this.continueLoop;
 	}
-	changeTimeScale(a = 1) {
-		this.timeScale = a;
-	}
 }
 
-module.exports = { Loop };
+export default Loop;
