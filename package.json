@@ -2,7 +2,8 @@
   "name": "rocket-boots-loop",
   "version": "0.3.0",
   "description": "Simple game loop",
-  "main": "index.mjs",
+  "type": "module",
+  "main": "./index.cjs",
   "exports": {
     "import": "./index.mjs",
     "require": "./index.cjs"

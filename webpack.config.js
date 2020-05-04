@@ -19,7 +19,7 @@ console.log(
 const ex = {
 	mode: 'production',
 	target: 'node', // vs. 'web'
-	entry: `./${package.main}`,
+	entry: package.main,
 	output: {
 		filename,
 		path: dirPath,
