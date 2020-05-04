@@ -48,6 +48,8 @@ The interval loop uses `setInterval`, and is suitable for both frontend and back
 
 ```javascript
 	import IntervalLoop from 'Interval.mjs';
+
+	// TODO: More documentation needed
 ```
 
 ### Methods
@@ -61,3 +63,4 @@ The interval loop uses `setInterval`, and is suitable for both frontend and back
 ## Development
 
 - Run `npm run build` to build the CommonJS version.
+- Please submit issues or pull requests if you'd like to see changes or fixes.
