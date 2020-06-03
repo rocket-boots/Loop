@@ -1,4 +1,4 @@
-import Loop from './Loop.mjs';
+import Loop from './Loop.js';
 
 class IntervalLoop extends Loop {
 	constructor(fn, options = {}) {
