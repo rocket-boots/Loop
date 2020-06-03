@@ -19,7 +19,7 @@ console.log(
 const ex = {
 	mode: 'production',
 	target: 'node', // vs. 'web'
-	entry: package.main,
+	entry: package.exports.import,
 	output: {
 		filename,
 		path: dirPath,

@@ -16,8 +16,9 @@ class Loop {
 	loop(now) {
 		if (!this.continueLoop) { return; }
 		const deltaT = (now - this.lastLoopTime) * this.timeScale;
-		if (deltaT === 0 && !this.allowDeltaTZero) {
-			console.log('deltaT of zero not allowed');
+		if (deltaT <= 0 && !this.allowDeltaTZero) {
+			// FIXME: This is happening every other loop, but should not.
+			// console.log('deltaT of zero not allowed');
 			this.next();
 			return;
 		}
