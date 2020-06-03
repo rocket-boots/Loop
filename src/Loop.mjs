@@ -7,6 +7,7 @@ class Loop {
 		this.timeScale = (typeof options.timeScale === 'number') ? options.timeScale : 1;
 		this.tick = 0;
 		this.now = (typeof performance === 'object') ? () => performance.now() : () => Date.now();
+		this.allowDeltaTZero = false;
 	}
 	loopOnNextFrame() {
 		if (!this.continueLoop) { return; }
@@ -15,6 +16,11 @@ class Loop {
 	loop(now) {
 		if (!this.continueLoop) { return; }
 		const deltaT = (now - this.lastLoopTime) * this.timeScale;
+		if (deltaT === 0 && !this.allowDeltaTZero) {
+			console.log('deltaT of zero not allowed');
+			this.next();
+			return;
+		}
 		if (this.tick >= Number.MAX_SAFE_INTEGER) {
 			this.tick = 0;
 		} else {
