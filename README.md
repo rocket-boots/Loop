@@ -15,7 +15,8 @@
 The basic loop is intended for browser usage, and makes use of `window.requestAnimationFrame` to determine when the next loop happens.
 
 ```javascript
-	import Loop from 'Loop.mjs'; // ES6 module
+	import { Loop } from 'rocket-boot-loop';
+	// Alternative? import Loop from 'Loop.mjs'; // ES6 module
 
 	// Define your own game loop function
 	function myGameLoopFunction(deltaT, tick, now) {
