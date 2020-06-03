@@ -1,4 +1,4 @@
-import IntervalLoop from './src/IntervalLoop.mjs';
-import Loop from './src/Loop.mjs';
+import IntervalLoop from './src/IntervalLoop.js';
+import Loop from './src/Loop.js';
 
 export default { Loop, IntervalLoop };
