@@ -1,6 +1,6 @@
 {
   "name": "rocket-boots-loop",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Simple game loop",
   "type": "module",
   "main": "./index.cjs",
@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/rocket-boots/Loop#readme",
   "devDependencies": {
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
     "webpack-node-externals": "^1.7.2"
   }
 }
