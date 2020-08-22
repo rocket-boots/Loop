@@ -1,6 +1,6 @@
 {
   "name": "rocket-boots-loop",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Simple game loop",
   "type": "module",
   "main": "./index.cjs",

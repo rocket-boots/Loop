@@ -95,40 +95,34 @@ __webpack_require__.r(__webpack_exports__);
 // CONCATENATED MODULE: ./src/Loop.js
 class Loop {
 	constructor(fn, options = {}) {
-		this.lastLoopTime = 0;
-		this.continueLoop = true;
-		this.looper = (typeof fn === 'function') ? fn : () => {};
-		this.next = this.loopOnNextFrame;
-		this.timeScale = (typeof options.timeScale === 'number') ? options.timeScale : 1;
-		this.tick = 0;
-		this.now = (typeof performance === 'object') ? () => performance.now() : () => Date.now();
-		this.allowDeltaTZero = false;
+		const o = this;
+		// "looper" is the main loop function to be run on each frame
+		o.looper = (typeof fn === 'function') ? fn : () => {};
+		o.next = o.loopOnNextFrame;
+		o.timeScale = (typeof options.timeScale === 'number') ? options.timeScale : 1;
+		o.lastLoopTime = 0;
+		o.continueLoop = true;
+		o.tick = 0;
+		o.now = (typeof performance === 'object') ? () => performance.now() : () => Date.now();
+		o.allowDeltaTZero = false;
 	}
 	loopOnNextFrame() {
 		if (!this.continueLoop) { return; }
 		window.requestAnimationFrame((now) => { this.loop(now); });
 	}
 	loop(now) {
-		if (!this.continueLoop) { return; }
-		const deltaT = (now - this.lastLoopTime) * this.timeScale;
-		if (deltaT <= 0 && !this.allowDeltaTZero) {
+		const o = this;
+		if (!o.continueLoop) { return; }
+		const deltaT = (now - o.lastLoopTime) * o.timeScale;
+		if (deltaT <= 0 && !o.allowDeltaTZero) {
 			// FIXME: This is happening every other loop, but should not.
 			// console.log('deltaT of zero not allowed');
-			this.next();
-			return;
+			return o.next();
 		}
-		if (this.tick >= Number.MAX_SAFE_INTEGER) {
-			this.tick = 0;
-		} else {
-			this.tick += 1;
-		}
-		const returnStop = this.looper(deltaT, this.tick, now);
-		this.lastLoopTime = now;
-		if (returnStop) {
-			this.stop();
-			return;
-		}
-		this.next();
+		o.tick = (o.tick >= Number.MAX_SAFE_INTEGER) ? 0 : o.tick + 1;
+		o.lastLoopTime = now;
+		// If the loop returns true, that indicates a stop command
+		return o.looper(deltaT, o.tick, now) ? o.stop() : o.next();
 	}
 	start() {
 		this.lastLoopTime = this.now();
@@ -142,8 +136,7 @@ class Loop {
 		this.continueLoop = false;
 	}
 	toggle() {
-		if (this.isLooping()) { return this.stop(); }
-		return this.start();
+		return this.isLooping() ? this.stop() : this.start();
 	}
 	isLooping() {
 		return this.continueLoop;
